@@ -4,6 +4,10 @@ namespace InfinitySort;
 
 use Error;
 
+/**
+ * Class SortObject
+ * @package InfinitySort
+ */
 class SortObject
 {
     public string $name;
@@ -40,7 +44,7 @@ class SortObject
 
     /**
      * @param object $object
-     * @return void
+     * @return SortObject
      */
     public function createFrom(object $object): SortObject
     {
