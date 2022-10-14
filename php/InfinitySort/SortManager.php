@@ -1,0 +1,55 @@
+<?php
+
+namespace InfinitySort;
+
+class SortManager
+{
+    private array $rows;
+    /**
+     * @var SortObject[] $sortedRows
+     */
+    public array $sortedRows;
+
+    /**
+     * @param ...$rows
+     */
+    public function __construct(...$rows) {
+        $this->rows = $rows;
+
+        $this->sort();
+    }
+
+    // TODO: Change variable names, because it's so confusing
+    /**
+     * @return void
+     */
+    private function sort(): void {
+        $levels1 = array_filter($this->rows, fn(SortObject $obj) => $obj->level === 0);
+        foreach ($levels1 as $firstLevel) {
+            $childrenOf1 = array_filter($this->rows, fn(SortObject $obj) => $obj->parent_id === $firstLevel->id);
+            $newEntry = SortObject::init()->createFrom($firstLevel);
+            foreach ($childrenOf1 as $key => $child1) {
+                //recursion not working fix it
+                $calculateInfinityLevel = function ($level, $otherLevels) use (&$calculateInfinityLevel, &$childrenOf1, $child1, $key) {
+                    foreach ($otherLevels as $obj) {
+                        $childrenOf1[$key]->children[] = $obj;
+                        $nextLevel = $level + 1;
+                        $filter = fn(SortObject $obj) => $obj->level === $nextLevel && $obj->parent_id === $obj->id;
+                        $calculateInfinityLevel($nextLevel, $filter);
+                    }
+                };
+                $filter = fn(SortObject $obj) => $obj->level === 2 && $obj->parent_id === $child1->id;
+                $calculateInfinityLevel(2, $filter);
+            }
+            $newEntry->children = $childrenOf1;
+            $this->sortedRows[] = $newEntry;
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function getHierarchy(): array {
+        return $this->sortedRows;
+    }
+}
