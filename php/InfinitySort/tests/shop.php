@@ -18,7 +18,7 @@ $sortManager = new SortManager([
     new sortObject("Letadla",  0, 7),
     new sortObject("Veřejná", 7, 8),
     new sortObject("Airbus",  8, 9),
-    new sortObject("Boieng",  8, 10),
+    new sortObject("Boieng",  9, 10),
     new sortObject("707",  10, 11),
     new sortObject("SmartWings",  8, 12),
     new sortObject("Lodě",  0, 13)
