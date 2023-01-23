@@ -11,26 +11,25 @@ use Error;
 class SortObject
 {
     public string $name;
-    public int $level;
+    public int $level = 0;
     public string $parent_id;
     public string $id;
     public array $children = [];
 
     /**
      * @param string $name
-     * @param int $level
      * @param int $parent_id
      * @param int $id
      * @param array $children
      */
     public function __construct(
-        string $name, int $level, int $parent_id, int $id, array $children = [])
+        string $name, int $parent_id, int $id, array $children = [])
     {
         $this->name = $name;
-        $this->level = $level;
         $this->parent_id = $parent_id;
         $this->id = $id;
         $this->children = $children;
+        $this->level = 0;
     }
 
     /**
@@ -39,7 +38,7 @@ class SortObject
      */
     public static function init(): SortObject
     {
-        return new SortObject("", 0, 0, 0, []);
+        return new SortObject("", 0, 0,  []);
     }
 
     /**
