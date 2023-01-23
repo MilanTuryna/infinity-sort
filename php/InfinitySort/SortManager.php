@@ -46,7 +46,7 @@ class SortManager
                 $calculateInfinityLevel = function ($level, $otherLevels, &$superior, $k) use (&$calculateInfinityLevel) {
                     foreach ($otherLevels as $objKey => $obj) {
                         $obj->level = $level;
-                        $this->debug($superior, $obj, $k);
+                        //$this->debug($superior, $obj, $k);
                         $superior[$k]->children[] = $obj;
                         $nextLevel = $level + 1;
                         $filter = fn(sortObject $e) => $e->parent_id === $obj->id;
