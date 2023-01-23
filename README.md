@@ -2,7 +2,7 @@ Test (Javascript):
 ```
 // tests/shop.js
 import {SortManager, SortObject} from "../infinity-sort.js";
-let sortManager = new SortManager(
+let sortManager = new SortManager([
     new SortObject("Auta", 0, 0, 1), // cars
     new SortObject("Závodní", 1, 1, 2), // race
     new SortObject("Nákladní", 1, 1, 3), // trucks
@@ -16,7 +16,7 @@ let sortManager = new SortManager(
     new SortObject("707", 3, 10, 11),
     new SortObject("SmartWings", 2, 8, 12),
     new SortObject("Lodě", 0, 0, 13)
-);
+]);
 let hierarchy = sortManager.getHierarchy();
 let json = JSON.stringify(hierarchy, null, "\t");
 
@@ -35,7 +35,7 @@ require "../SortObject.php";
 use InfinitySort\SortManager;
 use InfinitySort\sortObject;
 
-$sortManager = new SortManager(
+$sortManager = new SortManager([
     new sortObject("Auta", 0, 0, 1), // cars
     new sortObject("Závodní", 1, 1, 2), // race
     new sortObject("Nákladní", 1, 1, 3), // trucks
@@ -49,7 +49,7 @@ $sortManager = new SortManager(
     new sortObject("707", 3, 10, 11),
     new sortObject("SmartWings", 2, 8, 12),
     new sortObject("Lodě", 0, 0, 13)
-);
+]);
 $hierarchy = $sortManager->getHierarchy();
 $json = json_encode($hierarchy, JSON_PRETTY_PRINT);
 
